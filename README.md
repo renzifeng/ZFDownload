@@ -18,6 +18,10 @@
 * iOS 7+
 * Xcode 6+
 
+---
+#### ZFDownload的具体实现，可以看ZFPlayer，已获取1000多颗star：[ZFPlayer](https://github.com/renzifeng/ZFPlayer)
+---
+
 ## 效果图
 
 ![图片效果演示](https://github.com/renzifeng/ZFDownload/raw/master/ZFDownload.gif)
