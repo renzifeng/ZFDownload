@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CC635EB81CEAB00D00B76E2C /* ZFDownloadedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EB31CEAB00D00B76E2C /* ZFDownloadedCell.m */; };
+		CC635EB91CEAB00D00B76E2C /* ZFDownloadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EB51CEAB00D00B76E2C /* ZFDownloadingCell.m */; };
+		CC635EBA1CEAB00D00B76E2C /* ZFDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EB71CEAB00D00B76E2C /* ZFDownloadViewController.m */; };
+		CC635EC61CEB030B00B76E2C /* ZFDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EC31CEB030B00B76E2C /* ZFDownloadManager.m */; };
+		CC635EC71CEB030B00B76E2C /* ZFSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EC51CEB030B00B76E2C /* ZFSessionModel.m */; };
+		CC635EC91CEB038D00B76E2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC635EC81CEB038D00B76E2C /* LaunchScreen.storyboard */; };
+		CCCB27B81CE9ABE600280C42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27B71CE9ABE600280C42 /* main.m */; };
+		CCCB27BB1CE9ABE600280C42 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27BA1CE9ABE600280C42 /* AppDelegate.m */; };
+		CCCB27C11CE9ABE600280C42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCCB27BF1CE9ABE600280C42 /* Main.storyboard */; };
+		CCCB27C31CE9ABE600280C42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCCB27C21CE9ABE600280C42 /* Assets.xcassets */; };
+		CCCB27D11CE9ABE600280C42 /* ZFDownloadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27D01CE9ABE600280C42 /* ZFDownloadTests.m */; };
+		CCCB27DC1CE9ABE600280C42 /* ZFDownloadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27DB1CE9ABE600280C42 /* ZFDownloadUITests.m */; };
+		CCCB28181CE9B82C00280C42 /* ZFListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB28171CE9B82C00280C42 /* ZFListCell.m */; };
+		CCCB281E1CE9BA4E00280C42 /* ZFListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB281D1CE9BA4E00280C42 /* ZFListViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CCCB27CD1CE9ABE600280C42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCCB27AB1CE9ABE500280C42 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCCB27B21CE9ABE500280C42;
+			remoteInfo = ZFDownload;
+		};
+		CCCB27D81CE9ABE600280C42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCCB27AB1CE9ABE500280C42 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCCB27B21CE9ABE500280C42;
+			remoteInfo = ZFDownload;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CC635EB21CEAB00D00B76E2C /* ZFDownloadedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadedCell.h; sourceTree = "<group>"; };
+		CC635EB31CEAB00D00B76E2C /* ZFDownloadedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadedCell.m; sourceTree = "<group>"; };
+		CC635EB41CEAB00D00B76E2C /* ZFDownloadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadingCell.h; sourceTree = "<group>"; };
+		CC635EB51CEAB00D00B76E2C /* ZFDownloadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadingCell.m; sourceTree = "<group>"; };
+		CC635EB61CEAB00D00B76E2C /* ZFDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadViewController.h; sourceTree = "<group>"; };
+		CC635EB71CEAB00D00B76E2C /* ZFDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadViewController.m; sourceTree = "<group>"; };
+		CC635EC21CEB030B00B76E2C /* ZFDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadManager.h; sourceTree = "<group>"; };
+		CC635EC31CEB030B00B76E2C /* ZFDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadManager.m; sourceTree = "<group>"; };
+		CC635EC41CEB030B00B76E2C /* ZFSessionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSessionModel.h; sourceTree = "<group>"; };
+		CC635EC51CEB030B00B76E2C /* ZFSessionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSessionModel.m; sourceTree = "<group>"; };
+		CC635EC81CEB038D00B76E2C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CCCB27B31CE9ABE500280C42 /* ZFDownload.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZFDownload.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCCB27B71CE9ABE600280C42 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CCCB27B91CE9ABE600280C42 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CCCB27BA1CE9ABE600280C42 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CCCB27C01CE9ABE600280C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CCCB27C21CE9ABE600280C42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CCCB27C71CE9ABE600280C42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCCB27CC1CE9ABE600280C42 /* ZFDownloadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZFDownloadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCCB27D01CE9ABE600280C42 /* ZFDownloadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadTests.m; sourceTree = "<group>"; };
+		CCCB27D21CE9ABE600280C42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCCB27D71CE9ABE600280C42 /* ZFDownloadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZFDownloadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCCB27DB1CE9ABE600280C42 /* ZFDownloadUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadUITests.m; sourceTree = "<group>"; };
+		CCCB27DD1CE9ABE600280C42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCCB28161CE9B82C00280C42 /* ZFListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFListCell.h; sourceTree = "<group>"; };
+		CCCB28171CE9B82C00280C42 /* ZFListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFListCell.m; sourceTree = "<group>"; };
+		CCCB281C1CE9BA4E00280C42 /* ZFListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFListViewController.h; sourceTree = "<group>"; };
+		CCCB281D1CE9BA4E00280C42 /* ZFListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFListViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CCCB27B01CE9ABE500280C42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCCB27C91CE9ABE600280C42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCCB27D41CE9ABE600280C42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CC635EB11CEAB00D00B76E2C /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				CC635EB61CEAB00D00B76E2C /* ZFDownloadViewController.h */,
+				CC635EB71CEAB00D00B76E2C /* ZFDownloadViewController.m */,
+				CC635EB21CEAB00D00B76E2C /* ZFDownloadedCell.h */,
+				CC635EB31CEAB00D00B76E2C /* ZFDownloadedCell.m */,
+				CC635EB41CEAB00D00B76E2C /* ZFDownloadingCell.h */,
+				CC635EB51CEAB00D00B76E2C /* ZFDownloadingCell.m */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		CC635EC11CEB030B00B76E2C /* ZFDownload */ = {
+			isa = PBXGroup;
+			children = (
+				CC635EC21CEB030B00B76E2C /* ZFDownloadManager.h */,
+				CC635EC31CEB030B00B76E2C /* ZFDownloadManager.m */,
+				CC635EC41CEB030B00B76E2C /* ZFSessionModel.h */,
+				CC635EC51CEB030B00B76E2C /* ZFSessionModel.m */,
+			);
+			name = ZFDownload;
+			path = ../ZFDownload;
+			sourceTree = SOURCE_ROOT;
+		};
+		CCCB27AA1CE9ABE500280C42 = {
+			isa = PBXGroup;
+			children = (
+				CCCB27B51CE9ABE600280C42 /* ZFDownload */,
+				CCCB27CF1CE9ABE600280C42 /* ZFDownloadTests */,
+				CCCB27DA1CE9ABE600280C42 /* ZFDownloadUITests */,
+				CCCB27B41CE9ABE500280C42 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CCCB27B41CE9ABE500280C42 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB27B31CE9ABE500280C42 /* ZFDownload.app */,
+				CCCB27CC1CE9ABE600280C42 /* ZFDownloadTests.xctest */,
+				CCCB27D71CE9ABE600280C42 /* ZFDownloadUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CCCB27B51CE9ABE600280C42 /* ZFDownload */ = {
+			isa = PBXGroup;
+			children = (
+				CC635EC11CEB030B00B76E2C /* ZFDownload */,
+				CCCB28081CE9B76E00280C42 /* List */,
+				CC635EB11CEAB00D00B76E2C /* Download */,
+				CCCB27B91CE9ABE600280C42 /* AppDelegate.h */,
+				CCCB27BA1CE9ABE600280C42 /* AppDelegate.m */,
+				CCCB27BF1CE9ABE600280C42 /* Main.storyboard */,
+				CC635EC81CEB038D00B76E2C /* LaunchScreen.storyboard */,
+				CCCB27C21CE9ABE600280C42 /* Assets.xcassets */,
+				CCCB27C71CE9ABE600280C42 /* Info.plist */,
+				CCCB27B61CE9ABE600280C42 /* Supporting Files */,
+			);
+			path = ZFDownload;
+			sourceTree = "<group>";
+		};
+		CCCB27B61CE9ABE600280C42 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB27B71CE9ABE600280C42 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CCCB27CF1CE9ABE600280C42 /* ZFDownloadTests */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB27D01CE9ABE600280C42 /* ZFDownloadTests.m */,
+				CCCB27D21CE9ABE600280C42 /* Info.plist */,
+			);
+			path = ZFDownloadTests;
+			sourceTree = "<group>";
+		};
+		CCCB27DA1CE9ABE600280C42 /* ZFDownloadUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB27DB1CE9ABE600280C42 /* ZFDownloadUITests.m */,
+				CCCB27DD1CE9ABE600280C42 /* Info.plist */,
+			);
+			path = ZFDownloadUITests;
+			sourceTree = "<group>";
+		};
+		CCCB28081CE9B76E00280C42 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB281C1CE9BA4E00280C42 /* ZFListViewController.h */,
+				CCCB281D1CE9BA4E00280C42 /* ZFListViewController.m */,
+				CCCB28161CE9B82C00280C42 /* ZFListCell.h */,
+				CCCB28171CE9B82C00280C42 /* ZFListCell.m */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CCCB27B21CE9ABE500280C42 /* ZFDownload */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCCB27E01CE9ABE600280C42 /* Build configuration list for PBXNativeTarget "ZFDownload" */;
+			buildPhases = (
+				CCCB27AF1CE9ABE500280C42 /* Sources */,
+				CCCB27B01CE9ABE500280C42 /* Frameworks */,
+				CCCB27B11CE9ABE500280C42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZFDownload;
+			productName = ZFDownload;
+			productReference = CCCB27B31CE9ABE500280C42 /* ZFDownload.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CCCB27CB1CE9ABE600280C42 /* ZFDownloadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCCB27E31CE9ABE600280C42 /* Build configuration list for PBXNativeTarget "ZFDownloadTests" */;
+			buildPhases = (
+				CCCB27C81CE9ABE600280C42 /* Sources */,
+				CCCB27C91CE9ABE600280C42 /* Frameworks */,
+				CCCB27CA1CE9ABE600280C42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCCB27CE1CE9ABE600280C42 /* PBXTargetDependency */,
+			);
+			name = ZFDownloadTests;
+			productName = ZFDownloadTests;
+			productReference = CCCB27CC1CE9ABE600280C42 /* ZFDownloadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CCCB27D61CE9ABE600280C42 /* ZFDownloadUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCCB27E61CE9ABE600280C42 /* Build configuration list for PBXNativeTarget "ZFDownloadUITests" */;
+			buildPhases = (
+				CCCB27D31CE9ABE600280C42 /* Sources */,
+				CCCB27D41CE9ABE600280C42 /* Frameworks */,
+				CCCB27D51CE9ABE600280C42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCCB27D91CE9ABE600280C42 /* PBXTargetDependency */,
+			);
+			name = ZFDownloadUITests;
+			productName = ZFDownloadUITests;
+			productReference = CCCB27D71CE9ABE600280C42 /* ZFDownloadUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CCCB27AB1CE9ABE500280C42 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "任子丰";
+				TargetAttributes = {
+					CCCB27B21CE9ABE500280C42 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					CCCB27CB1CE9ABE600280C42 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = ML27AXLXF5;
+						TestTargetID = CCCB27B21CE9ABE500280C42;
+					};
+					CCCB27D61CE9ABE600280C42 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = ML27AXLXF5;
+						TestTargetID = CCCB27B21CE9ABE500280C42;
+					};
+				};
+			};
+			buildConfigurationList = CCCB27AE1CE9ABE500280C42 /* Build configuration list for PBXProject "ZFDownload" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CCCB27AA1CE9ABE500280C42;
+			productRefGroup = CCCB27B41CE9ABE500280C42 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CCCB27B21CE9ABE500280C42 /* ZFDownload */,
+				CCCB27CB1CE9ABE600280C42 /* ZFDownloadTests */,
+				CCCB27D61CE9ABE600280C42 /* ZFDownloadUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CCCB27B11CE9ABE500280C42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC635EC91CEB038D00B76E2C /* LaunchScreen.storyboard in Resources */,
+				CCCB27C31CE9ABE600280C42 /* Assets.xcassets in Resources */,
+				CCCB27C11CE9ABE600280C42 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCCB27CA1CE9ABE600280C42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCCB27D51CE9ABE600280C42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CCCB27AF1CE9ABE500280C42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCCB27BB1CE9ABE600280C42 /* AppDelegate.m in Sources */,
+				CC635EC61CEB030B00B76E2C /* ZFDownloadManager.m in Sources */,
+				CCCB281E1CE9BA4E00280C42 /* ZFListViewController.m in Sources */,
+				CC635EB91CEAB00D00B76E2C /* ZFDownloadingCell.m in Sources */,
+				CC635EB81CEAB00D00B76E2C /* ZFDownloadedCell.m in Sources */,
+				CC635EC71CEB030B00B76E2C /* ZFSessionModel.m in Sources */,
+				CC635EBA1CEAB00D00B76E2C /* ZFDownloadViewController.m in Sources */,
+				CCCB28181CE9B82C00280C42 /* ZFListCell.m in Sources */,
+				CCCB27B81CE9ABE600280C42 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCCB27C81CE9ABE600280C42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCCB27D11CE9ABE600280C42 /* ZFDownloadTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCCB27D31CE9ABE600280C42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCCB27DC1CE9ABE600280C42 /* ZFDownloadUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CCCB27CE1CE9ABE600280C42 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCCB27B21CE9ABE500280C42 /* ZFDownload */;
+			targetProxy = CCCB27CD1CE9ABE600280C42 /* PBXContainerItemProxy */;
+		};
+		CCCB27D91CE9ABE600280C42 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCCB27B21CE9ABE500280C42 /* ZFDownload */;
+			targetProxy = CCCB27D81CE9ABE600280C42 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CCCB27BF1CE9ABE600280C42 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CCCB27C01CE9ABE600280C42 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CCCB27DE1CE9ABE600280C42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CCCB27DF1CE9ABE600280C42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CCCB27E11CE9ABE600280C42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ZFDownload/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zifeng.ZFDownload;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CCCB27E21CE9ABE600280C42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ZFDownload/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zifeng.ZFDownload;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CCCB27E41CE9ABE600280C42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZFDownloadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zifeng.ZFDownloadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZFDownload.app/ZFDownload";
+			};
+			name = Debug;
+		};
+		CCCB27E51CE9ABE600280C42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZFDownloadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zifeng.ZFDownloadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZFDownload.app/ZFDownload";
+			};
+			name = Release;
+		};
+		CCCB27E71CE9ABE600280C42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZFDownloadUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zifeng.ZFDownloadUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZFDownload;
+			};
+			name = Debug;
+		};
+		CCCB27E81CE9ABE600280C42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZFDownloadUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zifeng.ZFDownloadUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZFDownload;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CCCB27AE1CE9ABE500280C42 /* Build configuration list for PBXProject "ZFDownload" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCCB27DE1CE9ABE600280C42 /* Debug */,
+				CCCB27DF1CE9ABE600280C42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CCCB27E01CE9ABE600280C42 /* Build configuration list for PBXNativeTarget "ZFDownload" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCCB27E11CE9ABE600280C42 /* Debug */,
+				CCCB27E21CE9ABE600280C42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CCCB27E31CE9ABE600280C42 /* Build configuration list for PBXNativeTarget "ZFDownloadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCCB27E41CE9ABE600280C42 /* Debug */,
+				CCCB27E51CE9ABE600280C42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CCCB27E61CE9ABE600280C42 /* Build configuration list for PBXNativeTarget "ZFDownloadUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCCB27E71CE9ABE600280C42 /* Debug */,
+				CCCB27E81CE9ABE600280C42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CCCB27AB1CE9ABE500280C42 /* Project object */;
+}
