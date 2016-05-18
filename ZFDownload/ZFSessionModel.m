@@ -41,21 +41,6 @@
     else { return @"B"; }
 }
 
-
-- (void)setStateBlock:(ZFDownloadStateBlock)stateBlock
-{
-    @synchronized(self) {
-        _stateBlock = [stateBlock copy];
-    }
-}
-
-- (void)setProgressBlock:(ZFDownloadProgressBlock)progressBlock
-{
-    @synchronized (self) {
-        _progressBlock = [progressBlock copy];
-    }
-}
-
 - (void)encodeWithCoder:(NSCoder *)aCoder //将属性进行编码
 {
     [aCoder encodeObject:self.url forKey:@"url"];
