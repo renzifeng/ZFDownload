@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DFAD7D15A5277175C6E0B65 /* libPods-ZFDownload.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 529AF0FF8C6667B056C1BC66 /* libPods-ZFDownload.a */; };
 		CC635EB81CEAB00D00B76E2C /* ZFDownloadedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EB31CEAB00D00B76E2C /* ZFDownloadedCell.m */; };
 		CC635EB91CEAB00D00B76E2C /* ZFDownloadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EB51CEAB00D00B76E2C /* ZFDownloadingCell.m */; };
 		CC635EBA1CEAB00D00B76E2C /* ZFDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EB71CEAB00D00B76E2C /* ZFDownloadViewController.m */; };
-		CC635EC61CEB030B00B76E2C /* ZFDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EC31CEB030B00B76E2C /* ZFDownloadManager.m */; };
-		CC635EC71CEB030B00B76E2C /* ZFSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC635EC51CEB030B00B76E2C /* ZFSessionModel.m */; };
 		CC635EC91CEB038D00B76E2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC635EC81CEB038D00B76E2C /* LaunchScreen.storyboard */; };
+		CC7926C81D5472540085378F /* ZFCommonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7926C01D5472540085378F /* ZFCommonHelper.m */; };
+		CC7926C91D5472540085378F /* ZFFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7926C31D5472540085378F /* ZFFileModel.m */; };
+		CC7926CA1D5472540085378F /* ZFDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7926C51D5472540085378F /* ZFDownloadManager.m */; };
+		CC7926CB1D5472540085378F /* ZFHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7926C71D5472540085378F /* ZFHttpRequest.m */; };
 		CCCB27B81CE9ABE600280C42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27B71CE9ABE600280C42 /* main.m */; };
 		CCCB27BB1CE9ABE600280C42 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27BA1CE9ABE600280C42 /* AppDelegate.m */; };
 		CCCB27C11CE9ABE600280C42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCCB27BF1CE9ABE600280C42 /* Main.storyboard */; };
@@ -41,17 +44,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20D5E131984DEC08345D8DF5 /* Pods-ZFDownload.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZFDownload.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZFDownload/Pods-ZFDownload.debug.xcconfig"; sourceTree = "<group>"; };
+		529AF0FF8C6667B056C1BC66 /* libPods-ZFDownload.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZFDownload.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC635EB21CEAB00D00B76E2C /* ZFDownloadedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadedCell.h; sourceTree = "<group>"; };
 		CC635EB31CEAB00D00B76E2C /* ZFDownloadedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadedCell.m; sourceTree = "<group>"; };
 		CC635EB41CEAB00D00B76E2C /* ZFDownloadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadingCell.h; sourceTree = "<group>"; };
 		CC635EB51CEAB00D00B76E2C /* ZFDownloadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadingCell.m; sourceTree = "<group>"; };
 		CC635EB61CEAB00D00B76E2C /* ZFDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadViewController.h; sourceTree = "<group>"; };
 		CC635EB71CEAB00D00B76E2C /* ZFDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadViewController.m; sourceTree = "<group>"; };
-		CC635EC21CEB030B00B76E2C /* ZFDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadManager.h; sourceTree = "<group>"; };
-		CC635EC31CEB030B00B76E2C /* ZFDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadManager.m; sourceTree = "<group>"; };
-		CC635EC41CEB030B00B76E2C /* ZFSessionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSessionModel.h; sourceTree = "<group>"; };
-		CC635EC51CEB030B00B76E2C /* ZFSessionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSessionModel.m; sourceTree = "<group>"; };
 		CC635EC81CEB038D00B76E2C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CC7926BF1D5472540085378F /* ZFCommonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCommonHelper.h; sourceTree = "<group>"; };
+		CC7926C01D5472540085378F /* ZFCommonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCommonHelper.m; sourceTree = "<group>"; };
+		CC7926C11D5472540085378F /* ZFDownloadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadDelegate.h; sourceTree = "<group>"; };
+		CC7926C21D5472540085378F /* ZFFileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFFileModel.h; sourceTree = "<group>"; };
+		CC7926C31D5472540085378F /* ZFFileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFFileModel.m; sourceTree = "<group>"; };
+		CC7926C41D5472540085378F /* ZFDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadManager.h; sourceTree = "<group>"; };
+		CC7926C51D5472540085378F /* ZFDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadManager.m; sourceTree = "<group>"; };
+		CC7926C61D5472540085378F /* ZFHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHttpRequest.h; sourceTree = "<group>"; };
+		CC7926C71D5472540085378F /* ZFHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHttpRequest.m; sourceTree = "<group>"; };
 		CCCB27B31CE9ABE500280C42 /* ZFDownload.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZFDownload.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCCB27B71CE9ABE600280C42 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CCCB27B91CE9ABE600280C42 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -69,6 +79,7 @@
 		CCCB28171CE9B82C00280C42 /* ZFListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFListCell.m; sourceTree = "<group>"; };
 		CCCB281C1CE9BA4E00280C42 /* ZFListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFListViewController.h; sourceTree = "<group>"; };
 		CCCB281D1CE9BA4E00280C42 /* ZFListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFListViewController.m; sourceTree = "<group>"; };
+		D050B5FFB9210DD79B5A2134 /* Pods-ZFDownload.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZFDownload.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZFDownload/Pods-ZFDownload.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DFAD7D15A5277175C6E0B65 /* libPods-ZFDownload.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +108,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AC1987AB791DFC2BBF6C2B9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20D5E131984DEC08345D8DF5 /* Pods-ZFDownload.debug.xcconfig */,
+				D050B5FFB9210DD79B5A2134 /* Pods-ZFDownload.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7DF839827144B4C527046811 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				529AF0FF8C6667B056C1BC66 /* libPods-ZFDownload.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CC635EB11CEAB00D00B76E2C /* Download */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,10 +141,15 @@
 		CC635EC11CEB030B00B76E2C /* ZFDownload */ = {
 			isa = PBXGroup;
 			children = (
-				CC635EC21CEB030B00B76E2C /* ZFDownloadManager.h */,
-				CC635EC31CEB030B00B76E2C /* ZFDownloadManager.m */,
-				CC635EC41CEB030B00B76E2C /* ZFSessionModel.h */,
-				CC635EC51CEB030B00B76E2C /* ZFSessionModel.m */,
+				CC7926BF1D5472540085378F /* ZFCommonHelper.h */,
+				CC7926C01D5472540085378F /* ZFCommonHelper.m */,
+				CC7926C11D5472540085378F /* ZFDownloadDelegate.h */,
+				CC7926C21D5472540085378F /* ZFFileModel.h */,
+				CC7926C31D5472540085378F /* ZFFileModel.m */,
+				CC7926C41D5472540085378F /* ZFDownloadManager.h */,
+				CC7926C51D5472540085378F /* ZFDownloadManager.m */,
+				CC7926C61D5472540085378F /* ZFHttpRequest.h */,
+				CC7926C71D5472540085378F /* ZFHttpRequest.m */,
 			);
 			name = ZFDownload;
 			path = ../ZFDownload;
@@ -128,6 +162,8 @@
 				CCCB27CF1CE9ABE600280C42 /* ZFDownloadTests */,
 				CCCB27DA1CE9ABE600280C42 /* ZFDownloadUITests */,
 				CCCB27B41CE9ABE500280C42 /* Products */,
+				6AC1987AB791DFC2BBF6C2B9 /* Pods */,
+				7DF839827144B4C527046811 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,9 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCCB27E01CE9ABE600280C42 /* Build configuration list for PBXNativeTarget "ZFDownload" */;
 			buildPhases = (
+				7C5759834935AC69E331BEAE /* Check Pods Manifest.lock */,
 				CCCB27AF1CE9ABE500280C42 /* Sources */,
 				CCCB27B01CE9ABE500280C42 /* Frameworks */,
 				CCCB27B11CE9ABE500280C42 /* Resources */,
+				0DA75E360B29EBEAC08F04F8 /* Embed Pods Frameworks */,
+				F16D99F4A194E7290ACFB037 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -322,17 +361,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0DA75E360B29EBEAC08F04F8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZFDownload/Pods-ZFDownload-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C5759834935AC69E331BEAE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F16D99F4A194E7290ACFB037 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZFDownload/Pods-ZFDownload-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CCCB27AF1CE9ABE500280C42 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CCCB27BB1CE9ABE600280C42 /* AppDelegate.m in Sources */,
-				CC635EC61CEB030B00B76E2C /* ZFDownloadManager.m in Sources */,
 				CCCB281E1CE9BA4E00280C42 /* ZFListViewController.m in Sources */,
 				CC635EB91CEAB00D00B76E2C /* ZFDownloadingCell.m in Sources */,
+				CC7926CA1D5472540085378F /* ZFDownloadManager.m in Sources */,
+				CC7926CB1D5472540085378F /* ZFHttpRequest.m in Sources */,
 				CC635EB81CEAB00D00B76E2C /* ZFDownloadedCell.m in Sources */,
-				CC635EC71CEB030B00B76E2C /* ZFSessionModel.m in Sources */,
+				CC7926C81D5472540085378F /* ZFCommonHelper.m in Sources */,
+				CC7926C91D5472540085378F /* ZFFileModel.m in Sources */,
 				CC635EBA1CEAB00D00B76E2C /* ZFDownloadViewController.m in Sources */,
 				CCCB28181CE9B82C00280C42 /* ZFListCell.m in Sources */,
 				CCCB27B81CE9ABE600280C42 /* main.m in Sources */,
@@ -466,6 +555,7 @@
 		};
 		CCCB27E11CE9ABE600280C42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20D5E131984DEC08345D8DF5 /* Pods-ZFDownload.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -479,6 +569,7 @@
 		};
 		CCCB27E21CE9ABE600280C42 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D050B5FFB9210DD79B5A2134 /* Pods-ZFDownload.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

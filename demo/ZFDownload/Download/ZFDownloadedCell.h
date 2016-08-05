@@ -28,5 +28,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *fileNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 
-@property (nonatomic, strong) ZFSessionModel *sessionModel;
-@end
+/** 下载信息模型 */
+@property (nonatomic, strong) ZFFileModel *fileInfo;@end

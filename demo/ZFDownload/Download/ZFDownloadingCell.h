@@ -24,7 +24,7 @@
 #import <UIKit/UIKit.h>
 #import "ZFDownloadManager.h"
 
-typedef void(^ZFDownloadBlock)(UIButton *);
+typedef void(^ZFBtnClickBlock)(void);
 
 @interface ZFDownloadingCell : UITableViewCell
 
@@ -35,7 +35,11 @@ typedef void(^ZFDownloadBlock)(UIButton *);
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *downloadBtn;
 
-@property (nonatomic, copy  ) ZFDownloadBlock downloadBlock;
-@property (nonatomic, strong) ZFSessionModel  *sessionModel;
+/** 下载按钮点击回调block */
+@property (nonatomic, copy  ) ZFBtnClickBlock  btnClickBlock;
+/** 下载信息模型 */
+@property (nonatomic, strong) ZFFileModel      *fileInfo;
+/** 该文件发起的请求 */
+@property (nonatomic,retain ) ZFHttpRequest    *request;
 
 @end

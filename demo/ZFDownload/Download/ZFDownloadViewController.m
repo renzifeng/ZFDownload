@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (atomic, strong) NSMutableArray *downloadObjectArr;
+@property (nonatomic, strong) ZFDownloadManager *downloadManage;
+
 @end
 
 @implementation ZFDownloadViewController
@@ -30,61 +32,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.rowHeight = 70.0f;
-    // NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES));
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
+    self.tableView.rowHeight = 70;
+    self.downloadManage.downloadDelegate = self;
+    //NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES));
 }
 
 - (void)initData
 {
-    NSMutableArray *downladed = [ZFDownloadManager sharedInstance].downloadedArray;
-    NSMutableArray *downloading = [ZFDownloadManager sharedInstance].downloadingArray;
-    _downloadObjectArr = @[].mutableCopy;
-    [_downloadObjectArr addObject:downladed];
-    [_downloadObjectArr addObject:downloading];
-    
+    [self.downloadManage startLoad];
+    NSMutableArray *downladed = self.downloadManage.finishedlist;
+    NSMutableArray *downloading = self.downloadManage.downinglist;
+    self.downloadObjectArr = @[].mutableCopy;
+    [self.downloadObjectArr addObject:downladed];
+    [self.downloadObjectArr addObject:downloading];
     [self.tableView reloadData];
 }
 
-#pragma mark - ZFDownloadDelegate
-
-- (void)downloadResponse:(ZFSessionModel *)sessionModel
+- (ZFDownloadManager *)downloadManage
 {
-    if (self.downloadObjectArr) {
-        // 取到对应的cell上的model
-        NSArray *downloadings = self.downloadObjectArr[1];
-        if ([downloadings containsObject:sessionModel]) {
-            
-            NSInteger index = [downloadings indexOfObject:sessionModel];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:1];
-            __block ZFDownloadingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            __weak typeof(self) weakSelf = self;
-            sessionModel.progressBlock = ^(CGFloat progress, NSString *speed, NSString *remainingTime, NSString *writtenSize, NSString *totalSize) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.progressLabel.text   = [NSString stringWithFormat:@"%@/%@ (%.2f%%)",writtenSize,totalSize,progress*100];
-                    cell.speedLabel.text      = speed;
-                    cell.progress.progress    = progress;
-                    cell.downloadBtn.selected = YES;
-                });
-            };
-            
-            sessionModel.stateBlock = ^(DownloadState state){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // 更新数据源
-                    if (state == DownloadStateCompleted) {
-                        [weakSelf initData];
-                        cell.downloadBtn.selected = NO;
-                    }
-                    // 暂停
-                    if (state == DownloadStateSuspended) {
-                        cell.speedLabel.text = @"已暂停";
-                        cell.downloadBtn.selected = NO;
-                    }
-                });
-            };
-        }
+    if (!_downloadManage) {
+        _downloadManage = [ZFDownloadManager sharedDownloadManager];
     }
+    return _downloadManage;
 }
 
 #pragma mark - Table view data source
@@ -102,20 +73,29 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    __block ZFSessionModel *downloadObject = self.downloadObjectArr[indexPath.section][indexPath.row];
     if (indexPath.section == 0) {
         ZFDownloadedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"downloadedCell"];
-        cell.sessionModel = downloadObject;
+        ZFFileModel *fileInfo = self.downloadObjectArr[indexPath.section][indexPath.row];
+        cell.fileInfo = fileInfo;
         return cell;
-    }else if (indexPath.section == 1) {
+    } else if (indexPath.section == 1) {
         ZFDownloadingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"downloadingCell"];
-        cell.sessionModel = downloadObject;
-        [ZFDownloadManager sharedInstance].delegate = self;
-        cell.downloadBlock = ^(UIButton *sender) {
-            [[ZFDownloadManager sharedInstance] download:downloadObject.url progress:^(CGFloat progress, NSString *speed, NSString *remainingTime, NSString *writtenSize, NSString *totalSize) {} state:^(DownloadState state) {}];
+        ZFHttpRequest *request = self.downloadObjectArr[indexPath.section][indexPath.row];
+        if (request == nil) { return nil; }
+        ZFFileModel *fileInfo = [request.userInfo objectForKey:@"File"];
+        
+        __weak typeof(self) weakSelf = self;
+        // 下载按钮点击时候的要刷新列表
+        cell.btnClickBlock = ^{
+            [weakSelf initData];
         };
+        // 下载模型赋值
+        cell.fileInfo = fileInfo;
+        // 下载的request
+        cell.request = request;
         return cell;
     }
+    
     return nil;
 }
 
@@ -124,21 +104,25 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return @"删除";
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return YES;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray *downloadArray = _downloadObjectArr[indexPath.section];
-    ZFSessionModel * downloadObject = downloadArray[indexPath.row];
-    // 根据url删除该条数据
-    [[ZFDownloadManager sharedInstance] deleteFile:downloadObject.url];
-    [downloadArray removeObject:downloadObject];
+    if (indexPath.section == 0) {
+        ZFFileModel *fileInfo = self.downloadObjectArr[indexPath.section][indexPath.row];
+        [self.downloadManage deleteFinishFile:fileInfo];
+    }else if (indexPath.section == 1) {
+        ZFHttpRequest *request = self.downloadObjectArr[indexPath.section][indexPath.row];
+        [self.downloadManage deleteRequest:request];
+    }
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 }
 
@@ -147,7 +131,40 @@
     return @[@"下载完成",@"下载中"][section];
 }
 
+#pragma mark - ZFDownloadDelegate
 
+// 开始下载
+- (void)startDownload:(ZFHttpRequest *)request
+{
+    NSLog(@"开始下载!");
+}
+
+// 下载中
+- (void)updateCellProgress:(ZFHttpRequest *)request
+{
+    ZFFileModel *fileInfo = [request.userInfo objectForKey:@"File"];
+    [self performSelectorOnMainThread:@selector(updateCellOnMainThread:) withObject:fileInfo waitUntilDone:YES];
+}
+
+// 下载完成
+- (void)finishedDownload:(ZFHttpRequest *)request
+{
+    [self initData];
+}
+
+// 更新下载进度
+- (void)updateCellOnMainThread:(ZFFileModel *)fileInfo
+{
+    NSArray *cellArr = [self.tableView visibleCells];
+    for (id obj in cellArr) {
+        if([obj isKindOfClass:[ZFDownloadingCell class]]) {
+            ZFDownloadingCell *cell = (ZFDownloadingCell *)obj;
+            if([cell.fileInfo.fileURL isEqualToString:fileInfo.fileURL]) {
+                cell.fileInfo = fileInfo;
+            }
+        }
+    }
+}
 
 @end
 

@@ -1,5 +1,5 @@
 //
-//  ZFDownloadedCell.m
+//  ZFDownloadDelegate.h
 //
 // Copyright (c) 2016年 任子丰 ( http://github.com/renzifeng )
 //
@@ -21,27 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ZFDownloadedCell.h"
+#import <Foundation/Foundation.h>
+#import "ZFHttpRequest.h"
 
-@implementation ZFDownloadedCell
+@protocol ZFDownloadDelegate <NSObject>
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-- (void)setFileInfo:(ZFFileModel *)fileInfo
-{
-    _fileInfo = fileInfo;
-    NSString *totalSize = [ZFCommonHelper getFileSizeString:fileInfo.fileSize];
-    self.fileNameLabel.text = fileInfo.fileName;
-    self.sizeLabel.text = totalSize;
-}
+@optional
+- (void)startDownload:(ZFHttpRequest *)request;
+- (void)updateCellProgress:(ZFHttpRequest *)request;
+- (void)finishedDownload:(ZFHttpRequest *)request;
+- (void)allowNextRequest;//处理一个窗口内连续下载多个文件且重复下载的情况
 
 @end

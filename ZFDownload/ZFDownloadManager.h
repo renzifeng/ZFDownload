@@ -21,133 +21,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
-#import "ZFSessionModel.h"
 
-// 缓存主目录
-#define ZFCachesDirectory [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]stringByAppendingPathComponent:@"ZFCache"]
+#import <Foundation/Foundation.h>
+#import "ZFCommonHelper.h"
+#import "ZFDownloadDelegate.h"
+#import "ZFFileModel.h"
+#import "ZFHttpRequest.h"
 
-// 保存文件名
-#define ZFFileName(url)  [[url componentsSeparatedByString:@"/"] lastObject]
+#define kMaxRequestCount  @"kMaxRequestCount"
 
-// 文件的存放路径（caches）
-#define ZFFileFullpath(url) [ZFCachesDirectory stringByAppendingPathComponent:ZFFileName(url)]
+@interface ZFDownloadManager : NSObject<ZFHttpRequestDelegate>
 
-// 文件的已下载长度
-#define ZFDownloadLength(url) [[[NSFileManager defaultManager] attributesOfItemAtPath:ZFFileFullpath(url) error:nil][NSFileSize] integerValue]
+/** 获得下载事件的vc，用在比如多选图片后批量下载的情况，这时需配合 allowNextRequest 协议方法使用 */
+@property (nonatomic, weak  ) id<ZFDownloadDelegate> VCdelegate;
+/** 下载列表delegate */
+@property (nonatomic, weak  ) id<ZFDownloadDelegate> downloadDelegate;
+/** 设置最大的并发下载个数 */
+@property (nonatomic, assign) NSInteger              maxCount;
+/** 已下载完成的文件列表（文件对象） */
+@property (atomic, strong, readonly) NSMutableArray *finishedlist;
+/** 正在下载的文件列表(ASIHttpRequest对象) */
+@property (atomic, strong, readonly) NSMutableArray *downinglist;
+/** 未下载完成的临时文件数组（文件对象) */
+@property (atomic, strong, readonly) NSMutableArray *filelist;
+/** 下载文件的模型 */
+@property (nonatomic, strong, readonly) ZFFileModel      *fileInfo;
 
-// 存储文件信息的路径（caches）
-#define ZFDownloadDetailPath [ZFCachesDirectory stringByAppendingPathComponent:@"downloadDetail.data"]
-
-@protocol ZFDownloadDelegate <NSObject>
-/** 下载中的回调 */
-- (void)downloadResponse:(ZFSessionModel *)sessionModel;
-
-@end
-
-@interface ZFDownloadManager : NSObject
-
-/** 保存所有下载相关信息字典 */
-@property (nonatomic, strong, readonly) NSMutableDictionary *sessionModels;
-/** 所有本地存储的所有下载信息数据数组 */
-@property (nonatomic, strong, readonly) NSMutableArray *sessionModelsArray;
-/** 下载完成的模型数组*/
-@property (nonatomic, strong, readonly) NSMutableArray *downloadedArray;
-/** 下载中的模型数组*/
-@property (nonatomic, strong, readonly) NSMutableArray *downloadingArray;
-/** ZFDownloadDelegate */
-@property (nonatomic, weak) id<ZFDownloadDelegate> delegate;
-
-/**
- *  单例
- *
- *  @return 返回单例对象
- */
-+ (instancetype)sharedInstance;
-
-/**
- * 归档
- */
-- (void)save:(NSArray *)sessionModels;
-
-/**
- * 读取model
- */
-- (NSArray *)getSessionModels;
-
-/**
- *  开启任务下载资源
- *
- *  @param url           下载地址
- *  @param progressBlock 回调下载进度
- *  @param stateBlock    下载状态
- */
-- (void)download:(NSString *)url progress:(ZFDownloadProgressBlock)progressBlock state:(ZFDownloadStateBlock)stateBlock;
-
-/**
- *  查询该资源的下载进度值
- *
- *  @param url 下载地址
- *
- *  @return 返回下载进度值
- */
-- (CGFloat)progress:(NSString *)url;
-
-/**
- *  获取该资源总大小
- *
- *  @param url 下载地址
- *
- *  @return 资源总大小
- */
-- (NSInteger)fileTotalLength:(NSString *)url;
-
-/**
- *  判断该资源是否下载完成
- *
- *  @param url 下载地址
- *
- *  @return YES: 完成
- */
-- (BOOL)isCompletion:(NSString *)url;
-
-/**
- *  删除该资源
- *
- *  @param url 下载地址
- */
-- (void)deleteFile:(NSString *)url;
-
-/**
- *  清空所有下载资源
- */
-- (void)deleteAllFile;
-
-/**
- *  开始下载
- */
-- (void)start:(NSString *)url;
-
-/**
- *  暂停下载
- */
-- (void)pause:(NSString *)url;
-
-/**
- *  判断当前url是否正在下载
- *
- *  @param url   视频url
- *  @param block 下载进度
- *
- *  @return 是否在下载
- */
-- (BOOL)isFileDownloadingForUrl:(NSString *)url withProgressBlock:(ZFDownloadProgressBlock)block;
-
-/**
- *  正在下载的视频URL的数组
- *
- *  @return 视频URL的数组
- */
-- (NSArray *)currentDownloads;
+/** 单例 */
++ (ZFDownloadManager *)sharedDownloadManager;
+/** 清除所有正在下载的请求 */
+- (void)clearAllRquests;
+/** 清除所有下载完的文件 */
+- (void)clearAllFinished;
+/** 恢复下载 */
+- (void)resumeRequest:(ZFHttpRequest *)request;
+/** 删除这个下载请求 */
+- (void)deleteRequest:(ZFHttpRequest *)request;
+/** 停止这个下载请求 */
+- (void)stopRequest:(ZFHttpRequest *)request;
+/** 保存下载完成的文件信息到plist */
+- (void)saveFinishedFile;
+/** 删除某一个下载完成的文件 */
+- (void)deleteFinishFile:(ZFFileModel *)selectFile;
+/** 下载视频时候调用 */
+- (void)downFileUrl:(NSString*)url
+           filename:(NSString*)name
+          fileimage:(UIImage *)image;
+/** 开始任务 */
+- (void)startLoad;
+/** 重新开始任务 */
+- (void)restartAllRquests;
 
 @end
+
+

@@ -12,7 +12,7 @@
 
 @interface ZFListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic  ) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray       *dataSource;
+@property (nonatomic, strong) NSArray       *dataSource;
 @end
 
 @implementation ZFListViewController
@@ -24,7 +24,7 @@
                         @"http://baobab.wdjcdn.com/1456117847747a_x264.mp4",
                         @"http://baobab.wdjcdn.com/14525705791193.mp4",
                         @"http://baobab.wdjcdn.com/1456459181808howtoloseweight_x264.mp4",
-                        @"http://baobab.wdjcdn.com/1455968234865481297704.mp4"].mutableCopy;
+                        @"http://baobab.wdjcdn.com/1455968234865481297704.mp4"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -35,20 +35,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ZFListCell * cell = [tableView dequeueReusableCellWithIdentifier:@"listCell"];
-    cell.titleLabel.text = self.dataSource[indexPath.row];
-    __block NSIndexPath *blockIndexPath = indexPath;
-    __weak typeof(self) weakSelf = self;
+    __block NSString *urlStr = self.dataSource[indexPath.row];
+    cell.titleLabel.text = urlStr;
     cell.downloadCallBack = ^{
-        NSString *urlString = self.dataSource[blockIndexPath.row];
-        [[ZFDownloadManager sharedInstance] download:urlString progress:^(CGFloat progress, NSString *speed, NSString *remainingTime, NSString *writtenSize, NSString *totalSize) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if ([weakSelf.dataSource containsObject:urlString]) {
-                    [weakSelf.dataSource removeObjectAtIndex:blockIndexPath.row];
-                    [weakSelf.tableView deleteRowsAtIndexPaths:@[blockIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                    [weakSelf.tableView reloadData];
-                }
-            });
-        } state:^(DownloadState state) {}];
+        // 此处是截取的下载地址，可以自己根据服务器的视频名称来赋值
+        NSString *name = [[urlStr componentsSeparatedByString:@"/"] lastObject];
+        [[ZFDownloadManager sharedDownloadManager] downFileUrl:urlStr filename:name fileimage:nil];
+        // 设置最多同时下载个数（默认是3）
+        [ZFDownloadManager sharedDownloadManager].maxCount = 2;
     };
     return cell;
 }
