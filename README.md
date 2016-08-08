@@ -35,55 +35,30 @@ pod 'ZFDownload'
 
 ## 使用
 ```objc
- [[ZFDownloadManager sharedInstance] download:urlString progress:^(CGFloat progress, NSString *speed, NSString *remainingTime, NSString *writtenSize, NSString *totalSize) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-				// insert code here
-            });
- } state:^(DownloadState state) {}];
+// 设置代理<ZFDownloadDelegate>
+self.downloadManage.downloadDelegate = self;
+// 指定下载URL,文件名称...
+[[ZFDownloadManager sharedDownloadManager] downFileUrl:urlStr filename:name fileimage:nil];
+// 设置最多同时下载个数（默认是3）
+[ZFDownloadManager sharedDownloadManager].maxCount = 2;
 
 ```
 在cell上获取实时下载进度，遵守 ZFDownloadDelegate代理，然后实现
 
 ```objc
+
 #pragma mark - ZFDownloadDelegate
 
-- (void)downloadResponse:(ZFSessionModel *)sessionModel
-{
-    if (self.downloadObjectArr) {
-        // 取到对应的cell上的model
-        NSArray *downloadings = self.downloadObjectArr[1];
-        if ([downloadings containsObject:sessionModel]) {
-            
-            NSInteger index = [downloadings indexOfObject:sessionModel];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:1];
-            __block ZFDownloadingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            __weak typeof(self) weakSelf = self;
-            sessionModel.progressBlock = ^(CGFloat progress, NSString *speed, NSString *remainingTime, NSString *writtenSize, NSString *totalSize) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.progressLabel.text   = [NSString stringWithFormat:@"%@/%@ (%.2f%%)",writtenSize,totalSize,progress*100];
-                    cell.speedLabel.text      = speed;
-                    cell.progress.progress    = progress;
-                    cell.downloadBtn.selected = YES;
-                });
-            };
-            
-            sessionModel.stateBlock = ^(DownloadState state){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // 更新数据源
-                    if (state == DownloadStateCompleted) {
-                        [weakSelf initData];
-                        cell.downloadBtn.selected = NO;
-                    }
-                    // 暂停
-                    if (state == DownloadStateSuspended) {
-                        cell.speedLabel.text = @"已暂停";
-                        cell.downloadBtn.selected = NO;
-                    }
-                });
-            };
-        }
-    }
-}
+// 开始下载
+- (void)startDownload:(ZFHttpRequest *)request;
+
+// 下载中
+- (void)updateCellProgress:(ZFHttpRequest *)request;
+
+// 下载完成
+- (void)finishedDownload:(ZFHttpRequest *)request;
+
+
 ```
 
 # 联系我
