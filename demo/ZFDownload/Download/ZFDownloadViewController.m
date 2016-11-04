@@ -22,14 +22,20 @@
 
 @implementation ZFDownloadViewController
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 更新数据源
+    [self initData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.rowHeight = 70;
     DownloadManager.downloadDelegate = self;
-    // 更新数据源
-    [self initData];
     //NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES));
 }
 

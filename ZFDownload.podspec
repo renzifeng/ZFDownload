@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'ZFDownload'
-    s.version      = '1.0.1'
+    s.version      = '1.0.2'
     s.summary      = 'Download manager based on ASIHTTPRequest'
     s.homepage     = 'https://github.com/renzifeng/ZFDownload'
     s.license      = 'MIT'
