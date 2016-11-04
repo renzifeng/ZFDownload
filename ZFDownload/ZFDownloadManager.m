@@ -176,7 +176,7 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     NSInteger receivedDataLength = [fileData length];
     fileInfo.fileReceivedSize = [NSString stringWithFormat:@"%zd", receivedDataLength];
     
-    NSLog(@"start down:已经下载：%@",fileInfo.fileReceivedSize);
+    // NSLog(@"start down:已经下载：%@",fileInfo.fileReceivedSize);
     ZFHttpRequest *midRequest = [[ZFHttpRequest alloc] initWithURL:[NSURL URLWithString:fileInfo.fileURL]];
     midRequest.downloadDestinationPath = FILE_PATH(fileInfo.fileName);
     midRequest.temporaryFileDownloadPath = fileInfo.tempPath;
@@ -232,12 +232,11 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     for (ZFFileModel *file in _filelist) {
         if (!file.error) {
             if (file.downloadState == ZFDownloading) {
-                
-                if (num>=max) {
-                    file.downloadState=ZFWillDownload;
-                } else
+                if (num >= max) {
+                    file.downloadState = ZFWillDownload;
+                } else {
                     num++;
-                
+                }
             }
         }
     }
@@ -259,8 +258,9 @@ static ZFDownloadManager *sharedDownloadManager = nil;
         if (!file.error) {
             if (file.downloadState == ZFDownloading) {
                 [self beginRequest:file isBeginDown:YES];
-            }else
+            } else {
                 [self beginRequest:file isBeginDown:NO];
+            }
         }
     }
     self.count = [_filelist count];

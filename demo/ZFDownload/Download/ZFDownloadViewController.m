@@ -11,59 +11,49 @@
 #import "ZFDownloadingCell.h"
 #import "ZFDownloadedCell.h"
 
+#define  DownloadManager  [ZFDownloadManager sharedDownloadManager]
+
 @interface ZFDownloadViewController ()<ZFDownloadDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (atomic, strong) NSMutableArray *downloadObjectArr;
-@property (nonatomic, strong) ZFDownloadManager *downloadManage;
 
 @end
 
 @implementation ZFDownloadViewController
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-    // 更新数据源
-    [self initData];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.rowHeight = 70;
-    self.downloadManage.downloadDelegate = self;
+    DownloadManager.downloadDelegate = self;
+    // 更新数据源
+    [self initData];
     //NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES));
 }
 
 - (void)initData
 {
-    [self.downloadManage startLoad];
-    NSMutableArray *downladed = self.downloadManage.finishedlist;
-    NSMutableArray *downloading = self.downloadManage.downinglist;
+    [DownloadManager startLoad];
+    NSMutableArray *downladed = DownloadManager.finishedlist;
+    NSMutableArray *downloading = DownloadManager.downinglist;
     self.downloadObjectArr = @[].mutableCopy;
     [self.downloadObjectArr addObject:downladed];
     [self.downloadObjectArr addObject:downloading];
     [self.tableView reloadData];
 }
 
-- (ZFDownloadManager *)downloadManage
-{
-    if (!_downloadManage) {
-        _downloadManage = [ZFDownloadManager sharedDownloadManager];
-    }
-    return _downloadManage;
+/** 全部开始 */
+- (IBAction)startAll:(UIBarButtonItem *)sender {
+    [DownloadManager startAllDownloads];
 }
 
-- (IBAction)startAll:(UIBarButtonItem *)sender {
-    [self.downloadManage startAllDownloads];
-}
+/** 全部暂停 */
 - (IBAction)pauseAll:(UIBarButtonItem *)sender {
-    [self.downloadManage pauseAllDownloads];
+    [DownloadManager pauseAllDownloads];
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -120,14 +110,14 @@
     return YES;
 }
 
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         ZFFileModel *fileInfo = self.downloadObjectArr[indexPath.section][indexPath.row];
-        [self.downloadManage deleteFinishFile:fileInfo];
+        [DownloadManager deleteFinishFile:fileInfo];
     }else if (indexPath.section == 1) {
         ZFHttpRequest *request = self.downloadObjectArr[indexPath.section][indexPath.row];
-        [self.downloadManage deleteRequest:request];
+        [DownloadManager deleteRequest:request];
     }
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 }
