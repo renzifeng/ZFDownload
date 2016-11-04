@@ -25,7 +25,7 @@
 
 @interface ZFHttpRequest()<ASIHTTPRequestDelegate,ASIProgressDelegate>
 {
-    ASIHTTPRequest* _realRequest;
+    ASIHTTPRequest *_realRequest;
 }
 @end
 
@@ -139,6 +139,14 @@
     if (self.delegate&&[self.delegate respondsToSelector:@selector(requestFailed:)]) {
         [self.delegate requestFailed:self];
     }
+}
+
+// 全部暂停的时候  request并不retain它们的代理，所以已经释放了代理 而之后request完成了，这将会引起崩溃。大多数情况下，如果你的代理即将被释放，你一定也希望取消所有request，因为你已经不再关心它们的返回情况了，所以得在ZFHttpRequest这个类的dealloc里面加上一个[request clearDelegatesAndCancel];
+// 代理类的dealloc函数
+- (void)dealloc
+{
+    //NSLog(@"%@ 释放了",_realRequest);
+    [_realRequest clearDelegatesAndCancel];
 }
 
 @end

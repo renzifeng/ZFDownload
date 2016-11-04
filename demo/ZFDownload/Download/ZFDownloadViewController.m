@@ -58,6 +58,12 @@
     return _downloadManage;
 }
 
+- (IBAction)startAll:(UIBarButtonItem *)sender {
+    [self.downloadManage startAllDownloads];
+}
+- (IBAction)pauseAll:(UIBarButtonItem *)sender {
+    [self.downloadManage pauseAllDownloads];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

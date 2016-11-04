@@ -95,12 +95,10 @@ static ZFDownloadManager *sharedDownloadManager = nil;
 {
     // 因为是重新下载，则说明肯定该文件已经被下载完，或者有临时文件正在留着，所以检查一下这两个地方，存在则删除掉
     
-    _fileInfo = [[ZFFileModel alloc]init];
-    if (!name) {
-        name = [url lastPathComponent];
-    }
+    _fileInfo = [[ZFFileModel alloc] init];
+    if (!name) { name = [url lastPathComponent]; }
     _fileInfo.fileName = name;
-    _fileInfo.fileURL = url;
+    _fileInfo.fileURL  = url;
     
     NSDate *myDate = [NSDate date];
     _fileInfo.time = [ZFCommonHelper dateToString:myDate];
@@ -129,9 +127,10 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     
     // 若不存在文件和临时文件，则是新的下载
     [self.filelist addObject:_fileInfo];
-    
+    // 开始下载
     [self startLoad];
-    if(self.VCdelegate != nil && [self.VCdelegate respondsToSelector:@selector(allowNextRequest)]) {
+    
+    if (self.VCdelegate && [self.VCdelegate respondsToSelector:@selector(allowNextRequest)]) {
         [self.VCdelegate allowNextRequest];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"该文件成功添加到下载队列" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -153,14 +152,14 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     for(ZFHttpRequest *tempRequest in self.downinglist)
     {
         /**
-         注意这里判读是否是同一下载的方法，asihttprequest
+         * 注意这里判读是否是同一下载的方法，asihttprequest有三种url： url，originalurl，redirectURL
+         * 经过实践，应该使用originalurl,就是最先获得到的原下载地址
          **/
         if([[[tempRequest.url absoluteString] lastPathComponent] isEqualToString:[fileInfo.fileURL lastPathComponent]])
         {
-            if ([tempRequest isExecuting]&&isBeginDown) {
+            if ([tempRequest isExecuting] && isBeginDown) {
                 return;
-            }else if ([tempRequest isExecuting]&&!isBeginDown)
-            {
+            } else if ([tempRequest isExecuting] && !isBeginDown) {
                 [tempRequest setUserInfo:[NSDictionary dictionaryWithObject:fileInfo forKey:@"File"]];
                 [tempRequest cancel];
                 [self.downloadDelegate updateCellProgress:tempRequest];
@@ -178,32 +177,27 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     fileInfo.fileReceivedSize = [NSString stringWithFormat:@"%zd", receivedDataLength];
     
     NSLog(@"start down:已经下载：%@",fileInfo.fileReceivedSize);
-    ZFHttpRequest *midRequest = [[ZFHttpRequest alloc]initWithURL: [NSURL URLWithString:fileInfo.fileURL]];
+    ZFHttpRequest *midRequest = [[ZFHttpRequest alloc] initWithURL:[NSURL URLWithString:fileInfo.fileURL]];
     midRequest.downloadDestinationPath = FILE_PATH(fileInfo.fileName);
     midRequest.temporaryFileDownloadPath = fileInfo.tempPath;
     midRequest.delegate = self;
     [midRequest setUserInfo:[NSDictionary dictionaryWithObject:fileInfo forKey:@"File"]];//设置上下文的文件基本信息
-    if (isBeginDown) {
-        [midRequest startAsynchronous];
-    }
+    if (isBeginDown) { [midRequest startAsynchronous]; }
     
     // 如果文件重复下载或暂停、继续，则把队列中的请求删除，重新添加
     BOOL exit = NO;
     for (ZFHttpRequest *tempRequest in self.downinglist) {
-        if([[[tempRequest.url absoluteString] lastPathComponent] isEqualToString:[fileInfo.fileURL lastPathComponent]])
-        {
+        if([[[tempRequest.url absoluteString] lastPathComponent] isEqualToString:[fileInfo.fileURL lastPathComponent]]) {
             [self.downinglist replaceObjectAtIndex:[_downinglist indexOfObject:tempRequest] withObject:midRequest];
             exit = YES;
             break;
         }
     }
     
-    if (!exit) {
-        [self.downinglist addObject:midRequest];
-    }
+    if (!exit) { [self.downinglist addObject:midRequest]; }
     [self.downloadDelegate updateCellProgress:midRequest];
-    
 }
+
 #pragma mark - 存储下载信息到一个plist文件
 
 - (void)saveDownloadFile:(ZFFileModel*)fileinfo
@@ -241,7 +235,7 @@ static ZFDownloadManager *sharedDownloadManager = nil;
                 
                 if (num>=max) {
                     file.downloadState=ZFWillDownload;
-                }else
+                } else
                     num++;
                 
             }
@@ -288,20 +282,22 @@ static ZFDownloadManager *sharedDownloadManager = nil;
                 indexmax = [_filelist indexOfObject:file];
             }
         }
-    } //此时下载中数目是否是最大，并获得最大时的位置Index
+    }
+    // 此时下载中数目是否是最大，并获得最大时的位置Index
     if (downingcount == max) {
         ZFFileModel *file  = [_filelist objectAtIndex:indexmax];
         if (file.downloadState == ZFDownloading) {
             file.downloadState = ZFWillDownload;
         }
-    }//中止一个进程使其进入等待
-    
+    }
+    // 中止一个进程使其进入等待
     for (ZFFileModel *file in _filelist) {
         if ([file.fileName isEqualToString:fileInfo.fileName]) {
             file.downloadState = ZFDownloading;
             file.error = NO;
         }
-    }//重新开始此下载
+    }
+    // 重新开始此下载
     [self startLoad];
 }
 
@@ -310,8 +306,10 @@ static ZFDownloadManager *sharedDownloadManager = nil;
 - (void)stopRequest:(ZFHttpRequest *)request
 {
     NSInteger max = self.maxCount;
-    if([request isExecuting]) { [request cancel]; }
-    ZFFileModel *fileInfo =  [request.userInfo objectForKey:@"File"];
+    if([request isExecuting]) {
+        [request cancel];
+    }
+    ZFFileModel *fileInfo = [request.userInfo objectForKey:@"File"];
     for (ZFFileModel *file in _filelist) {
         if ([file.fileName isEqualToString:fileInfo.fileName]) {
             file.downloadState = ZFStopDownload;
@@ -325,7 +323,7 @@ static ZFDownloadManager *sharedDownloadManager = nil;
             downingcount++;
         }
     }
-    if (downingcount<max) {
+    if (downingcount < max) {
         for (ZFFileModel *file in _filelist) {
             if (file.downloadState == ZFWillDownload){
                 file.downloadState = ZFDownloading;
@@ -404,14 +402,27 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     [_filelist removeAllObjects];
 }
 
-- (void)restartAllRquests
+- (void)startAllDownloads
 {
-    
     for (ZFHttpRequest *request in _downinglist) {
-        if([request isExecuting])
+        if([request isExecuting]) {
             [request cancel];
+        }
+        ZFFileModel *fileInfo = [request.userInfo objectForKey:@"File"];
+        fileInfo.downloadState = ZFDownloading;
     }
-    
+    [self startLoad];
+}
+
+- (void)pauseAllDownloads
+{
+    for (ZFHttpRequest *request in _downinglist) {
+        if([request isExecuting]) {
+            [request cancel];
+        }
+        ZFFileModel *fileInfo = [request.userInfo objectForKey:@"File"];
+        fileInfo.downloadState = ZFStopDownload;
+    }
     [self startLoad];
 }
 
@@ -604,10 +615,7 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     if([fileManager fileExistsAtPath:configPath]) //如果存在临时文件的配置文件
     {
         [fileManager removeItemAtPath:configPath error:&error];
-        if(!error)
-        {
-            NSLog(@"%@",[error description]);
-        }
+        if(!error) { NSLog(@"%@",[error description]); }
     }
     
     [_filelist removeObject:fileInfo];
@@ -638,8 +646,7 @@ static ZFDownloadManager *sharedDownloadManager = nil;
                 }
             }
         } else { // 如果正在下载中，择重新下载
-            for(ZFHttpRequest *request in self.downinglist)
-            {
+            for(ZFHttpRequest *request in self.downinglist) {
                 ZFFileModel *ZFFileModel = [request.userInfo objectForKey:@"File"];
                 if([ZFFileModel.fileName isEqualToString:_fileInfo.fileName])
                 {
