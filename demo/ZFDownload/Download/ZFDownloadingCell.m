@@ -75,10 +75,16 @@
 {
     _fileInfo = fileInfo;
     self.fileNameLabel.text = fileInfo.fileName;
-    // 服务器可能响应的慢，拿不到视频总长度
-    if (!fileInfo.fileSize) {
-        self.progressLabel.text = @"正在获取";
-        self.speedLabel.text = @"0B/S";
+    // 服务器可能响应的慢，拿不到视频总长度 && 不是下载状态
+    if ([fileInfo.fileSize longLongValue] == 0 && !(fileInfo.downloadState == ZFDownloading)) {
+        self.progressLabel.text = @"";
+        if (fileInfo.downloadState == ZFStopDownload) {
+            self.speedLabel.text = @"已暂停";
+        } else if (fileInfo.downloadState == ZFWillDownload) {
+            self.downloadBtn.selected = YES;
+            self.speedLabel.text = @"等待下载";
+        }
+        self.progress.progress = 0.0;
         return;
     }
     NSString *currentSize = [ZFCommonHelper getFileSizeString:fileInfo.fileReceivedSize];
