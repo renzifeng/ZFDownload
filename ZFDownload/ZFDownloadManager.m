@@ -28,15 +28,15 @@ static ZFDownloadManager *sharedDownloadManager = nil;
 @interface ZFDownloadManager ()
 
 /** 本地临时文件夹文件的个数 */
-@property (nonatomic,assign ) NSInteger   count;
+@property (nonatomic,assign) NSInteger  count;
 /** 已下载完成的文件列表（文件对象）*/
-@property (atomic,strong ) NSMutableArray *finishedlist;
+@property (strong) NSMutableArray       *finishedlist;
 /** 正在下载的文件列表(ASIHttpRequest对象)*/
-@property (atomic,strong ) NSMutableArray *downinglist;
+@property (strong) NSMutableArray       *downinglist;
 /** 未下载完成的临时文件数组（文件对象)*/
-@property (atomic,strong ) NSMutableArray *filelist;
+@property (strong) NSMutableArray       *filelist;
 /** 下载文件的模型 */
-@property (nonatomic,strong ) ZFFileModel *fileInfo;
+@property (nonatomic,strong) ZFFileModel *fileInfo;
 
 @end
 

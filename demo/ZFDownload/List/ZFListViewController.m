@@ -12,7 +12,7 @@
 
 @interface ZFListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic  ) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray       *dataSource;
+@property (nonatomic, strong) NSArray *dataSource;
 @end
 
 @implementation ZFListViewController
