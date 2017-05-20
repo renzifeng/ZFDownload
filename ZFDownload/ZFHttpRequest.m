@@ -123,6 +123,7 @@
 }
 - (void)request:(ASIHTTPRequest *)request willRedirectToURL:(NSURL *)newURL
 {
+    [request redirectToURL:newURL];
     if (self.delegate&&[self.delegate respondsToSelector:@selector(request:willRedirectToURL:)]) {
         [self.delegate request:self willRedirectToURL:newURL];
     }
