@@ -586,6 +586,13 @@ static ZFDownloadManager *sharedDownloadManager = nil;
     [self saveDownloadFile:fileInfo];
 }
 
+- (void)request:(ZFHttpRequest *)request willRedirectToURL:(NSURL *)newURL
+{
+    if (newURL) {
+        NSLog(@"重定向URL:%@", newURL);
+    }
+}
+
 - (void)request:(ZFHttpRequest *)request didReceiveBytes:(long long)bytes
 {
     ZFFileModel *fileInfo = [request.userInfo objectForKey:@"File"];
