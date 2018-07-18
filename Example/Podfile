@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ZFDownload_Example' do
+  pod 'ZFDownload', :path => '../'
+
+  target 'ZFDownload_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
