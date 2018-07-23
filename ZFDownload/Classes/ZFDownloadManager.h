@@ -15,10 +15,9 @@
 + (instancetype)shareManager;
 
 /**
- 设置下载任务的个数，最多支持3个下载任务同时进行。
+ 设置下载任务的个数，最多支持5个下载任务同时进行。
  */
 - (void)setMaxTaskCount:(NSInteger)count;
-
 
 /**
  开始/创建一个后台下载任务。开发者自己定义/扩展item中的数据和内容
@@ -91,25 +90,6 @@
  获取所有下载数据所占用的磁盘空间
  */
 - (NSUInteger)videoCacheSize;
-
-/**
- 保存下载状态，一般不用，下载内部自己处理完成
- */
-- (void)saveDownloadStatus;
-
-
-/**
- 是否允许蜂窝煤网络下载，以及网络状态变为蜂窝煤是否允许下载，必须把所有的downloadTask全部暂停，然后重新创建。否则，原先创建的
- 下载task依旧在网络切换为蜂窝煤网络时会继续下载
- 
- @param isAllow 是否允许蜂窝煤网络下载
- */
-- (void)allowsCellularAccess:(BOOL)isAllow;
-
-/**
- 获取是否允许蜂窝煤访问
- */
-- (BOOL)isAllowsCellularAccess;
 
 
 
