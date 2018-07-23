@@ -248,7 +248,7 @@
 			attributes = {
 				CLASSPREFIX = ZF;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = w0shiliyang;
+				ORGANIZATIONNAME = "紫枫";
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
