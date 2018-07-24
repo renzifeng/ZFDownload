@@ -51,13 +51,7 @@
  设置下载任务的个数，最多支持5个下载任务同时进行。
  */
 - (void)setMaxTaskCount:(NSInteger)count {
-    if (count > 5) {
-        self.maxConcurrentCount = 5;
-    } else if(count <= 0){
-        self.maxConcurrentCount = 1;
-    } else{
-        self.maxConcurrentCount = count;
-    }
+    self.maxConcurrentCount = MAX(1, MIN(5, count));
 }
 
 
