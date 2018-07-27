@@ -7,6 +7,7 @@
 //
 
 #import "ZFDownloadManager.h"
+#import "ZFDataBaseManager.h"
 
 @interface ZFDownloadManager ()<NSURLSessionDelegate, NSURLSessionDownloadDelegate>
 /// NSURLSession
@@ -63,7 +64,12 @@
  @param item 下载信息的item
  */
 - (void)startDownloadWithItem:(ZFDownloadItem *)item {
-    
+    // 取出数据库中模型数据，如果不存在，添加到数据空中
+    ZFDownloadItem *downnloadItem = [[ZFDataBaseManager shareManager] getIteamWithUrl:item.url];
+    if (!downnloadItem) {
+        downnloadItem = item;
+        [[ZFDataBaseManager shareManager] insertItem:downnloadItem];
+    }
 }
 
 /**

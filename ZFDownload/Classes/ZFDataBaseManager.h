@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, ZFDBGetDateOption) {
 
 @interface ZFDataBaseManager : NSObject
 
-
++ (instancetype)shareManager;
 /**
  create a database by filepath
 
@@ -33,16 +33,16 @@ typedef NS_ENUM(NSInteger, ZFDBGetDateOption) {
 - (instancetype)initWithFilePath:(NSString *)filePath;
 
 /// 插入数据
-- (void)insertModel:(ZFDownloadItem *)model;
+- (void)insertItem:(ZFDownloadItem *)model;
 
 /// 根据url获取数据
-- (ZFDownloadItem *)getModelWithUrl:(NSString *)url;
+- (ZFDownloadItem *)getIteamWithUrl:(NSString *)url;
 
 /// 获取第一条等待的数据
-- (ZFDownloadItem *)getWaitingModel;
+- (ZFDownloadItem *)getWaitingItem;
 
 /// 获取最后一条正在下载的数据
-- (ZFDownloadItem *)getLastDownloadingModel;
+- (ZFDownloadItem *)getLastDownloadingItem;
 
 /// 获取所有数据
 - (NSArray<ZFDownloadItem *> *)getAllCacheData;
@@ -60,9 +60,9 @@ typedef NS_ENUM(NSInteger, ZFDBGetDateOption) {
 - (NSArray<ZFDownloadItem *> *)getAllWaitingData;
 
 /// 更新数据
-- (void)updateWithModel:(ZFDownloadItem *)model option:(ZFDownloadState)option;
+- (void)updateWithItem:(ZFDownloadItem *)item option:(ZFDownloadState)option;
 
 /// 删除数据
-- (void)deleteModelWithUrl:(NSString *)url;
+- (void)deleteItemWithUrl:(NSString *)url;
 
 @end

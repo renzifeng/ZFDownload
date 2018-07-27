@@ -28,6 +28,17 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
     [self closeDatabase];
 }
 
++ (instancetype)shareManager {
+    static ZFDataBaseManager *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"ZFDownloadVideoCaches.sqlite"];
+        manager = [[self alloc] initWithPath:filePath];
+    });
+    
+    return manager;
+}
+
 - (instancetype)initWithFilePath:(NSString *)filePath {
     if (self = [super init]) {
         if (sqlite3_initialize() != SQLITE_OK) {
@@ -51,7 +62,7 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
 }
 
 #pragma mark - public methods
-- (void)insertModel:(ZFDownloadItem *)model {
+- (void)insertItem:(ZFDownloadItem *)model {
     NSString *query=[NSString stringWithFormat:@"insert into zf_videoCaches (resumeData, vid, fileName, url, progress, state, totalFileSize, tmpFileSize, speed, lastSpeedTime, intervalFileSize, lastStateTime) values ('%@','%@','%@','%@','%f','%ld','%ld','%ld','%ld','%ld','%ld','%ld')", model.resumeData, model.vid,  model.fileName, model.url,model.progress,model.state,model.totalFileSize,model.tmpFileSize,model.speed,model.lastSpeedTime,model.intervalFileSize, model.lastStateTime];
     sqlite3_stmt *insertStatement;
     int rc = sqlite3_prepare_v2(_database, [query UTF8String], -1, &insertStatement, nil);
@@ -75,15 +86,15 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
     }
 }
 
-- (ZFDownloadItem *)getModelWithUrl:(NSString *)url {
+- (ZFDownloadItem *)getItemWithUrl:(NSString *)url {
     return [self getModelWithOption:ZFDBGetDateOptionModelWithUrl url:url];
 }
 
-- (ZFDownloadItem *)getWaitingModel {
+- (ZFDownloadItem *)getWaitingItem {
     return [self getModelWithOption:ZFDBGetDateOptionWaitingModel url:nil];
 }
 
-- (ZFDownloadItem *)getLastDownloadingModel {
+- (ZFDownloadItem *)getLastDownloadingItem {
     return [self getModelWithOption:ZFDBGetDateOptionLastDownloadingModel url:nil];
 }
 
@@ -107,20 +118,20 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
     return [self getDateWithOption:ZFDBGetDateOptionAllWaitingData];
 }
 
-- (void)updateWithModel:(ZFDownloadItem *)model option:(ZFDownloadState)option {
+- (void)updateWithItem:(ZFDownloadItem *)item option:(ZFDownloadState)option {
     NSString *query;
     if (option & ZFDBUpdateOptionState) {
 //        [self postStateChangeNotificationWithFMDatabase:db model:model];
-        query = [NSString stringWithFormat:@"update zf_videoCaches set state = %@ where url = %@", [NSNumber numberWithInteger:model.state],model.url];
+        query = [NSString stringWithFormat:@"update zf_videoCaches set state = %@ where url = %@", [NSNumber numberWithInteger:item.state],item.url];
     }
     if (option & ZFDBUpdateOptionLastStateTime) {
 //         query = [NSString stringWithFormat:@"update zf_videoCaches set lastStateTime = %@ where url = %@", [NSNumber numberWithInteger:[HWToolBox getTimeStampWithDate:[NSDate date]]], model.url];
     }
     if (option & ZFDBUpdateOptionResumeData) {
-        query = [NSString stringWithFormat:@"update zf_videoCaches set resumeData = %@ where url = %@", model.resumeData, model.url];
+        query = [NSString stringWithFormat:@"update zf_videoCaches set resumeData = %@ where url = %@", item.resumeData, item.url];
     }
     if (option & ZFDBUpdateOptionProgressData) {
-        query = [NSString stringWithFormat:@"update zf_videoCaches set tmpFileSize = %@, totalFileSize = %@, progress = %@, lastSpeedTime = %@, intervalFileSize = %@ where url = %@", [NSNumber numberWithInteger:model.tmpFileSize], [NSNumber numberWithFloat:model.totalFileSize], [NSNumber numberWithFloat:model.progress], [NSNumber numberWithInteger:model.lastSpeedTime], [NSNumber numberWithInteger:model.intervalFileSize], model.url];
+        query = [NSString stringWithFormat:@"update zf_videoCaches set tmpFileSize = %@, totalFileSize = %@, progress = %@, lastSpeedTime = %@, intervalFileSize = %@ where url = %@", [NSNumber numberWithInteger:item.tmpFileSize], [NSNumber numberWithFloat:item.totalFileSize], [NSNumber numberWithFloat:item.progress], [NSNumber numberWithInteger:item.lastSpeedTime], [NSNumber numberWithInteger:item.intervalFileSize], item.url];
     }
     if (option & ZFDBUpdateOptionAllParam) {
 //        [self postStateChangeNotificationWithFMDatabase:db model:model];
@@ -135,7 +146,7 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
     }
 }
 
-- (void)deleteModelWithUrl:(NSString *)url {
+- (void)deleteItemWithUrl:(NSString *)url {
     NSString *query = [NSString stringWithFormat:@"delete from zf_videoCaches where url = '%@'",url];
     int result = sqlite3_exec(_database, [query UTF8String], nil, nil, nil);
     if (result == SQLITE_OK) {

@@ -26,8 +26,8 @@
     item.fileName  = @"thie";
     item.url = @"http://www.hsd.mp4";
     item.state = ZFDownloadStateWaiting;
-    [manager insertModel:item];
-    ZFDownloadItem *item1  = [manager getWaitingModel];
+    [manager insertItem:item];
+    ZFDownloadItem *item1  = [manager getWaitingItem];
     
 }
  
