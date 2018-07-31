@@ -18,8 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"ZFDownloadVideoCaches.sqlite"];
-    ZFDataBaseManager *manager = [[ZFDataBaseManager alloc] initWithFilePath:filePath];
+//    NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"ZFDownloadVideoCaches.sqlite"];
+//    ZFDataBaseManager *manager = [[ZFDataBaseManager alloc] initWithPath:filePath];
+    
+    ZFDataBaseManager *manager = [ZFDataBaseManager shareManager];
     
     ZFDownloadItem *item = [ZFDownloadItem new];
     item.vid = @"123";

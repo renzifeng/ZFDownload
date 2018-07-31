@@ -78,7 +78,7 @@
 /**
  获取所有的未完成的下载item
  */
-- (NSArray *)downloadList;
+- (NSArray *)unFinishList;
 
 /**
  获取所有已完成的下载item
@@ -87,9 +87,9 @@
 
 
 /**
- 获取所有下载数据所占用的磁盘空间
+ 获取所有下载数据所占用的磁盘空间,包含下载完成与未完成的，单位为 MB
  */
-- (NSUInteger)videoCacheSize;
+- (NSString *)videoCacheSize;
 
 
 

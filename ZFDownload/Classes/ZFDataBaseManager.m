@@ -9,15 +9,6 @@
 #import "ZFDataBaseManager.h"
 #import <sqlite3.h>
 
-typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
-    ZFDBUpdateOptionState         = 1 << 0,  // 更新状态
-    ZFDBUpdateOptionLastStateTime = 1 << 1,  // 更新状态最后改变的时间
-    ZFDBUpdateOptionResumeData    = 1 << 2,  // 更新下载的数据
-    ZFDBUpdateOptionProgressData  = 1 << 3,  // 更新进度数据（包含tmpFileSize、totalFileSize、progress、intervalFileSize、lastSpeedTime）
-    ZFDBUpdateOptionAllParam      = 1 << 4   // 更新全部数据
-};
-
-
 @implementation ZFDataBaseManager {
     sqlite3 *_database;
 }
@@ -39,7 +30,7 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
     return manager;
 }
 
-- (instancetype)initWithFilePath:(NSString *)filePath {
+- (instancetype)initWithPath:(NSString *)filePath {
     if (self = [super init]) {
         if (sqlite3_initialize() != SQLITE_OK) {
             return nil;
@@ -87,38 +78,38 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
 }
 
 - (ZFDownloadItem *)getItemWithUrl:(NSString *)url {
-    return [self getModelWithOption:ZFDBGetDateOptionModelWithUrl url:url];
+    return [self getModelWithOption:ZFDBGetDataOptionModelWithUrl url:url];
 }
 
 - (ZFDownloadItem *)getWaitingItem {
-    return [self getModelWithOption:ZFDBGetDateOptionWaitingModel url:nil];
+    return [self getModelWithOption:ZFDBGetDataOptionWaitingModel url:nil];
 }
 
 - (ZFDownloadItem *)getLastDownloadingItem {
-    return [self getModelWithOption:ZFDBGetDateOptionLastDownloadingModel url:nil];
+    return [self getModelWithOption:ZFDBGetDataOptionLastDownloadingModel url:nil];
 }
 
 - (NSArray<ZFDownloadItem *> *)getAllCacheData {
-   return  [self getDateWithOption:ZFDBGetDateOptionAllCacheData];
+   return  [self getDateWithOption:ZFDBGetDataOptionAllCacheData];
 }
 
 - (NSArray<ZFDownloadItem *> *)getAllDownloadingData {
-    return [self getDateWithOption:ZFDBGetDateOptionAllDownloadingData];
+    return [self getDateWithOption:ZFDBGetDataOptionAllDownloadingData];
 }
 
 - (NSArray<ZFDownloadItem *> *)getAllDownloadedData {
-    return [self getDateWithOption:ZFDBGetDateOptionAllDownloadedData];
+    return [self getDateWithOption:ZFDBGetDataOptionAllDownloadedData];
 }
 
 - (NSArray<ZFDownloadItem *> *)getAllUnDownloadedData {
-    return [self getDateWithOption:ZFDBGetDateOptionAllUnDownloadedData];
+    return [self getDateWithOption:ZFDBGetDataOptionAllUnDownloadedData];
 }
 
 - (NSArray<ZFDownloadItem *> *)getAllWaitingData {
-    return [self getDateWithOption:ZFDBGetDateOptionAllWaitingData];
+    return [self getDateWithOption:ZFDBGetDataOptionAllWaitingData];
 }
 
-- (void)updateWithItem:(ZFDownloadItem *)item option:(ZFDownloadState)option {
+- (void)updateWithItem:(ZFDownloadItem *)item option:(ZFDBUpdateOption)option {
     NSString *query;
     if (option & ZFDBUpdateOptionState) {
 //        [self postStateChangeNotificationWithFMDatabase:db model:model];
@@ -167,19 +158,19 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
 }
 
 /// 获取单条数据
-- (ZFDownloadItem *)getModelWithOption:(ZFDBGetDateOption)option url:(NSString *)url {
+- (ZFDownloadItem *)getModelWithOption:(ZFDBGetDataOption)option url:(NSString *)url {
     __block ZFDownloadItem *model = [[ZFDownloadItem alloc] init];
     NSString *query;
     switch (option) {
-        case ZFDBGetDateOptionModelWithUrl:
+        case ZFDBGetDataOptionModelWithUrl:
             query = [NSString stringWithFormat:@"select * from zf_videoCaches where url = '%@'", url];
             break;
             
-        case ZFDBGetDateOptionWaitingModel:
+        case ZFDBGetDataOptionWaitingModel:
             query = [NSString stringWithFormat:@"select * from zf_videoCaches where state = %@ order by lastStateTime asc limit 0,1", [NSNumber numberWithInteger:ZFDownloadStateWaiting]];
             break;
             
-        case ZFDBGetDateOptionLastDownloadingModel:
+        case ZFDBGetDataOptionLastDownloadingModel:
             query = [NSString stringWithFormat:@"select * from zf_videoCaches where state = %@ order by lastStateTime desc limit 0,1", [NSNumber numberWithInteger:ZFDownloadStateDownloading]];
             break;
             
@@ -205,23 +196,23 @@ typedef NS_OPTIONS(NSUInteger, ZFDBUpdateOption) {
 }
 
 /// 获取数据库模型集合
-- (NSArray<ZFDownloadItem *> *)getDateWithOption:(ZFDBGetDateOption)option {
+- (NSArray<ZFDownloadItem *> *)getDateWithOption:(ZFDBGetDataOption)option {
     __block NSArray<ZFDownloadItem *> *array = nil;
     NSString *query;
     switch (option) {
-        case ZFDBGetDateOptionAllCacheData:
+        case ZFDBGetDataOptionAllCacheData:
             query = [NSString stringWithFormat:@"select * from zf_videoCaches"];
             break;
-        case ZFDBGetDateOptionAllDownloadingData:
+        case ZFDBGetDataOptionAllDownloadingData:
             query = [NSString stringWithFormat:@"select * from  zf_videoCaches where state = %@ order by lastStateTime desc", [NSNumber numberWithInteger:ZFDownloadStateDownloading]];
             break;
-        case ZFDBGetDateOptionAllDownloadedData:
+        case ZFDBGetDataOptionAllDownloadedData:
             query = [NSString stringWithFormat:@"select * from zf_videoCaches where state = %@", [NSNumber numberWithInteger:ZFDownloadStateFinish]];
             break;
-        case ZFDBGetDateOptionAllUnDownloadedData:
+        case ZFDBGetDataOptionAllUnDownloadedData:
             query = [NSString stringWithFormat:@"select * from  zf_videoCaches where state != %@", [NSNumber numberWithInteger:ZFDownloadStateFinish]];
             break;
-        case ZFDBGetDateOptionAllWaitingData:
+        case ZFDBGetDataOptionAllWaitingData:
             query = [NSString stringWithFormat:@"select * from  zf_videoCaches where state = %@", [NSNumber numberWithInteger:ZFDownloadStateWaiting]];
             break;
         default:
